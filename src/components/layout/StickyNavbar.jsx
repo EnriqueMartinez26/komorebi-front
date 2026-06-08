@@ -8,7 +8,7 @@ import { useUI } from "../../context/UIContext";
 import { useAuth } from "../../context/AuthContext";
 import { SearchBar } from "../search/SearchBar";
 
-// Clase para representar un ítem de navegación (POO)
+// cada link del navbar
 class NavItem {
   constructor(label, path, icon = null, requiresAuth = false) {
     this.label = label;
@@ -17,9 +17,9 @@ class NavItem {
     this.requiresAuth = requiresAuth;
   }
 
-  // Comportamiento de renderizado condicional basado en el estado
+  // si se muestra o no
   canRender(isAuthenticated) {
-    // Si requiere autenticación y no hay sesión, no se muestra
+    // si necesita login y no hay sesión, ocultar
     if (this.requiresAuth && !isAuthenticated) {
       return false;
     }
@@ -27,7 +27,7 @@ class NavItem {
   }
 }
 
-// Clase gestora del menú para encapsular la lógica (POO)
+// maneja los items del menú
 class NavMenuManager {
   constructor() {
     this.leftItems = [
@@ -59,7 +59,7 @@ class NavMenuManager {
   }
 }
 
-// Instanciamos el manager del menú
+// creo el menu
 const menuManager = new NavMenuManager();
 
 export function StickyNavbar() {

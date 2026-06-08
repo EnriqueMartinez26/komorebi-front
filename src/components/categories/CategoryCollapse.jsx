@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AdBanner } from "../ui/AdBanner";
 import { Icon } from "../ui/Icon";
 
-// Clase para definir las acciones disponibles por categoría (POO)
+// acciones de cada categoría
 class CategoryAction {
   constructor(label, pathGenerator, iconName = null) {
     this.label = label;
@@ -12,7 +12,7 @@ class CategoryAction {
   }
 }
 
-// Factoría/Gestor que decide qué botones mostrar según la categoría (POO)
+// arma los botones según la categoría
 class CategoryActionManager {
   constructor() {
     this.actions = [
@@ -30,7 +30,7 @@ class CategoryActionManager {
   }
 }
 
-// Instanciamos el manager
+// creo el manager
 const actionManager = new CategoryActionManager();
 
 export function CategoryCollapse({ categories, sideBanner }) {

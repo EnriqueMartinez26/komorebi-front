@@ -2,17 +2,17 @@
 
 :root {
   color-scheme: light;
-  --bg: #faf8f5;              /* Fondo blanco cálido lino */
-  --surface: #ffffff;         /* Superficies limpias papel */
-  --surface-strong: #f3ede2;  /* Tono madera de roble / arena */
-  --text: #2c2a29;            /* Carbón suave */
-  --muted: #827b73;           /* Gris piedra cálido */
-  --border: #e8e3da;          /* Arena fina */
-  --accent: #bc6a4c;          /* Terracota quemado */
-  --accent-strong: #96472b;   /* Terracota profundo */
-  --success: #677d6a;         /* Verde oliva/sage (wasabi) */
-  --danger: #b27373;          /* Rojo gastado arcilla */
-  --shadow: 0 8px 30px rgba(44, 42, 41, 0.02); /* Sombras zen hiper-suaves */
+  --bg: #faf8f5;              /* fondo cálido */
+  --surface: #ffffff;         /* superficies */
+  --surface-strong: #f3ede2;  /* arena */
+  --text: #2c2a29;            /* texto oscuro */
+  --muted: #827b73;           /* gris */
+  --border: #e8e3da;          /* bordes */
+  --accent: #bc6a4c;          /* acento */
+  --accent-strong: #96472b;   /* acento hover */
+  --success: #677d6a;         /* verde éxito */
+  --danger: #b27373;          /* rojo error */
+  --shadow: 0 8px 30px rgba(44, 42, 41, 0.02); /* sombra suave */
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -75,7 +75,7 @@ img {
   padding: 3rem 0 4rem;
 }
 
-/* Header & Brand */
+/* Header */
 .site-header {
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
@@ -149,7 +149,7 @@ img {
   color: var(--accent);
 }
 
-/* Search Bar */
+/* Buscador */
 .search-bar {
   display: flex;
   align-items: center;
@@ -179,7 +179,7 @@ img {
   display: none;
 }
 
-/* Sticky Navbar */
+/* Navbar fija */
 .sticky-nav {
   position: sticky;
   top: 81px;
@@ -256,7 +256,7 @@ img {
   stroke-width: 1.75;
 }
 
-/* Buttons */
+/* Botones */
 .icon-button,
 .secondary-button,
 .product-actions button,
@@ -308,7 +308,7 @@ img {
   cursor: pointer;
 }
 
-/* Section Headings */
+/* Títulos de sección */
 .section-heading {
   display: flex;
   align-items: flex-end;
@@ -336,7 +336,7 @@ img {
   display: block;
 }
 
-/* Containers / Sections */
+/* Contenedores */
 .featured-section,
 .catalog-section,
 .category-section,
@@ -362,7 +362,7 @@ img {
   margin-bottom: 3rem;
 }
 
-/* Featured Slider */
+/* Slider destacados */
 .featured-track {
   display: grid;
   grid-auto-flow: column;
@@ -461,7 +461,7 @@ img {
   gap: 0.5rem;
 }
 
-/* Ad Banner */
+/* Banner publicitario */
 .ad-banner {
   position: relative;
   overflow: hidden;
@@ -496,7 +496,7 @@ img {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Product Grid & Cards */
+/* Grilla de productos */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -614,7 +614,7 @@ img {
   color: var(--accent);
 }
 
-/* Pagination */
+/* Paginación */
 .pagination {
   margin-top: 2.5rem;
   display: flex;
@@ -628,7 +628,7 @@ img {
   gap: 0.5rem;
 }
 
-/* Categories Collapse */
+/* Categorías */
 .category-layout {
   display: grid;
   grid-template-columns: minmax(0, 2fr) 300px;
@@ -768,7 +768,7 @@ img {
   align-items: center;
 }
 
-/* Loaders and Empty States */
+/* Loaders */
 .loader,
 .empty-state {
   margin: 4rem auto;
@@ -788,7 +788,7 @@ img {
   animation: pulse 1s infinite alternate;
 }
 
-/* Forms */
+/* Formularios */
 .auth-form {
   padding: 2rem;
   display: grid;
@@ -855,7 +855,7 @@ img {
   font-weight: 500;
 }
 
-/* Modals */
+/* Modales */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -889,7 +889,7 @@ img {
   font-weight: 600;
 }
 
-/* Toast */
+/* Notificaciones */
 .toast-viewport {
   position: fixed;
   right: 1.5rem;
@@ -921,7 +921,7 @@ img {
   background: var(--text);
 }
 
-/* Product Detail */
+/* Detalle de producto */
 .product-detail {
   padding: 2.5rem;
   display: grid;
@@ -979,7 +979,7 @@ img {
   font-size: 0.9rem;
 }
 
-/* Cart & Checkout Layout */
+/* Carrito */
 .cart-layout,
 .contact-layout {
   display: grid;
@@ -1055,7 +1055,7 @@ img {
   padding: 0.4rem;
 }
 
-/* Auth Page Layout */
+/* Página de auth */
 .auth-page-card {
   width: min(480px, 100%);
   margin: 2rem auto;
@@ -1065,7 +1065,7 @@ img {
   padding: 2rem;
 }
 
-/* Mobile elements */
+/* Mobile */
 .mobile-drawer {
   display: none;
 }
@@ -1074,7 +1074,7 @@ img {
   display: none;
 }
 
-/* ── Help Page ─────────────────────────────────────────── */
+/* Página de ayuda */
 .help-intro {
   max-width: 680px;
   margin-bottom: 2rem;
@@ -1161,7 +1161,7 @@ img {
   font-size: 0.95rem;
 }
 
-/* ── About Page ─────────────────────────────────────────── */
+/* Página nosotros */
 .about-hero {
   margin-bottom: 3rem;
   max-width: 700px;
@@ -1256,7 +1256,7 @@ img {
   text-align: center;
 }
 
-/* ── Footer bottom inner ────────────────────────────────── */
+/* Footer inferior */
 .footer-bottom-inner {
   display: flex;
   justify-content: space-between;
@@ -1283,7 +1283,7 @@ img {
   margin-bottom: 1rem;
 }
 
-/* Animations */
+/* Animaciones */
 
 @keyframes pulse {
   from {
@@ -1307,7 +1307,7 @@ img {
   }
 }
 
-/* Responsive Overrides */
+/* Responsive */
 @media (max-width: 1024px) {
   .featured-track {
     grid-auto-columns: calc((100% - 1.5rem) / 2);
@@ -1384,7 +1384,7 @@ img {
     display: none;
   }
 
-  /* Footer Social Row and Links Styling */
+  /* Redes sociales mobile */
   .footer-social-row {
     display: flex;
     justify-content: center;
