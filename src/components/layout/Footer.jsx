@@ -49,22 +49,22 @@ export function Footer() {
                 </a>
               ))}
             </li>
-            <li className="footer-qr" style={{ marginTop: "1rem" }}>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "inherit" }}>
+            <li className="footer-qr" style={{ marginTop: "1.5rem" }}>
+              <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", justifyContent: "inherit" }}>
                 <div>
-                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.8rem", color: "var(--muted)" }}>Ver Sitio:</span>
+                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.85rem", color: "var(--muted)" }}>Ver Sitio:</span>
                   <img
                     src="/images/qr_deploy.png"
                     alt="QR del Deploy"
-                    style={{ width: "80px", height: "80px", borderRadius: "6px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
+                    style={{ width: "105px", height: "105px", borderRadius: "8px", border: "1px solid var(--border)", background: "white", padding: "4px", transition: "transform 0.2s ease" }}
                   />
                 </div>
                 <div>
-                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.8rem", color: "var(--muted)" }}>Data Fiscal:</span>
+                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.85rem", color: "var(--muted)" }}>Data Fiscal:</span>
                   <img
                     src="/images/data_fiscal.png"
                     alt="Data Fiscal AFIP"
-                    style={{ width: "80px", height: "80px", borderRadius: "6px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
+                    style={{ width: "105px", height: "105px", borderRadius: "8px", border: "1px solid var(--border)", background: "white", padding: "4px", transition: "transform 0.2s ease" }}
                   />
                 </div>
               </div>
