@@ -80,7 +80,7 @@ export function CartPage() {
           <article key={item.id} className="cart-item">
             <img src={item.image} alt={item.name} />
             <div>
-              <h3>{item.name}</h3>
+              <h4>{item.name}</h4>
               <p>Precio unitario: {formatCurrency(item.price)}</p>
               <p>Subtotal: {formatCurrency(item.subtotal)}</p>
             </div>
@@ -125,6 +125,7 @@ export function CartPage() {
           <label>
             Dirección de envío
             <textarea
+              rows="4"
               value={checkoutForm.shippingAddress}
               onChange={(event) =>
                 setCheckoutForm((current) => ({
@@ -133,6 +134,7 @@ export function CartPage() {
                 }))
               }
               required
+              style={{ resize: "none" }}
             />
           </label>
           <label>

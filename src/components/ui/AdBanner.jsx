@@ -15,7 +15,7 @@ export function AdBanner({ banner, className = "" }) {
     <BannerWrapper className={`ad-banner ${className}`.trim()} {...extraProps}>
       <img src={banner.imageUrl} alt={banner.title} loading="lazy" />
       <div className="ad-banner-copy">
-        <strong>{banner.title}</strong>
+        <h3>{banner.title}</h3>
         <span>Ver mas</span>
       </div>
     </BannerWrapper>

@@ -1015,6 +1015,12 @@ img {
   font-size: 1.1rem;
 }
 
+.cart-item p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .checkout-card {
   padding: 2rem;
   align-self: start;
