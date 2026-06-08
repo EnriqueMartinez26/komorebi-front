@@ -38,8 +38,8 @@ class NavMenuManager {
     ];
 
     this.rightItems = [
-      new NavItem("Favoritos", "/favoritos", "heart", true), // Requiere sesión
-      new NavItem("Carrito", "/carrito", "cart", true),      // Requiere sesión
+      new NavItem("Favoritos", "/favoritos", "heart", false), // Visible para invitados
+      new NavItem("Carrito", "/carrito", "cart", false),      // Visible para invitados
       new NavItem("Ayuda", "/ayuda", "help")
     ];
   }

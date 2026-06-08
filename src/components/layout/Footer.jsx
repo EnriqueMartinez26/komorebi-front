@@ -50,12 +50,24 @@ export function Footer() {
               ))}
             </li>
             <li className="footer-qr" style={{ marginTop: "1rem" }}>
-              <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.85rem", color: "var(--muted)" }}>Escaneá para ver el sitio:</span>
-              <img
-                src="/images/qr_deploy.png"
-                alt="QR del Deploy"
-                style={{ width: "100px", height: "100px", borderRadius: "8px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
-              />
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "inherit" }}>
+                <div>
+                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.8rem", color: "var(--muted)" }}>Ver Sitio:</span>
+                  <img
+                    src="/images/qr_deploy.png"
+                    alt="QR del Deploy"
+                    style={{ width: "80px", height: "80px", borderRadius: "6px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
+                  />
+                </div>
+                <div>
+                  <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.8rem", color: "var(--muted)" }}>Data Fiscal:</span>
+                  <img
+                    src="/images/data_fiscal.png"
+                    alt="Data Fiscal AFIP"
+                    style={{ width: "80px", height: "80px", borderRadius: "6px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
+                  />
+                </div>
+              </div>
             </li>
           </ul>
         </div>
