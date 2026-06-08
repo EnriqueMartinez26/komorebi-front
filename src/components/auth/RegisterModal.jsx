@@ -32,7 +32,12 @@ export function RegisterModal() {
       await register(form);
       setForm(initialForm);
     } catch (submitError) {
-      setError(submitError.message);
+      if (submitError.details && Array.isArray(submitError.details)) {
+        const errorMessages = submitError.details.map((d) => d.msg).join("\n");
+        setError(errorMessages);
+      } else {
+        setError(submitError.message);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -105,7 +110,7 @@ export function RegisterModal() {
             />
           </label>
         </div>
-        {error ? <p className="form-error">{error}</p> : null}
+        {error ? <p className="form-error" style={{ whiteSpace: "pre-line" }}>{error}</p> : null}
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Creando..." : "Registrarme"}
         </button>

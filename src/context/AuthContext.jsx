@@ -11,11 +11,21 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshSession = async () => {
+    const token = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
+    if (!token) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await authService.me();
       setUser(response.user);
     } catch (_error) {
       setUser(null);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(STORAGE_KEY);
+      }
     } finally {
       setIsLoading(false);
     }
