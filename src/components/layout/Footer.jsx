@@ -49,7 +49,14 @@ export function Footer() {
                 </a>
               ))}
             </li>
-            <li className="footer-qr">QR Data Fiscal</li>
+            <li className="footer-qr" style={{ marginTop: "1rem" }}>
+              <span style={{ display: "block", marginBottom: "0.5rem", fontSize: "0.85rem", color: "var(--muted)" }}>Escaneá para ver el sitio:</span>
+              <img
+                src="/images/qr_deploy.png"
+                alt="QR del Deploy"
+                style={{ width: "100px", height: "100px", borderRadius: "8px", border: "1px solid var(--border)", background: "white", padding: "4px" }}
+              />
+            </li>
           </ul>
         </div>
       </div>
