@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Modal } from "../ui/Modal";
 import { useAuth } from "../../context/AuthContext";
 import { useUI } from "../../context/UIContext";
+import {
+  PASSWORD_MIN_LENGTH,
+  USERNAME_MIN_LENGTH
+} from "../../utils/validation";
 
 const initialForm = {
   firstName: "",
@@ -26,6 +30,12 @@ export function RegisterModal() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
+
+    if (form.password !== form.confirmPassword) {
+      setError("Las contraseñas no coinciden.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -50,6 +60,7 @@ export function RegisterModal() {
           <label>
             Nombre
             <input
+              required
               value={form.firstName}
               onChange={(event) =>
                 setForm((current) => ({ ...current, firstName: event.target.value }))
@@ -59,6 +70,7 @@ export function RegisterModal() {
           <label>
             Apellido
             <input
+              required
               value={form.lastName}
               onChange={(event) =>
                 setForm((current) => ({ ...current, lastName: event.target.value }))
@@ -69,6 +81,8 @@ export function RegisterModal() {
         <label>
           Username
           <input
+            required
+            minLength={USERNAME_MIN_LENGTH}
             value={form.username}
             onChange={(event) =>
               setForm((current) => ({ ...current, username: event.target.value }))
@@ -79,6 +93,7 @@ export function RegisterModal() {
           Email
           <input
             type="email"
+            required
             value={form.email}
             onChange={(event) =>
               setForm((current) => ({ ...current, email: event.target.value }))
@@ -90,6 +105,8 @@ export function RegisterModal() {
             Contraseña
             <input
               type="password"
+              required
+              minLength={PASSWORD_MIN_LENGTH}
               value={form.password}
               onChange={(event) =>
                 setForm((current) => ({ ...current, password: event.target.value }))
@@ -100,6 +117,8 @@ export function RegisterModal() {
             Confirmar contraseña
             <input
               type="password"
+              required
+              minLength={PASSWORD_MIN_LENGTH}
               value={form.confirmPassword}
               onChange={(event) =>
                 setForm((current) => ({

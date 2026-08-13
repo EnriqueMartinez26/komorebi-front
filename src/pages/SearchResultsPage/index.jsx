@@ -13,7 +13,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 export function SearchResultsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const term = searchParams.get("q") || DEFAULT_SEARCH_TERM;
-  const currentPage = Number(searchParams.get("page") || 1);
+  const currentPage = Math.max(Math.floor(Number(searchParams.get("page"))) || 1, 1);
   const limit = useProductsPerPage();
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();

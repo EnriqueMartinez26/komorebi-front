@@ -41,6 +41,7 @@ export function LoginModal() {
         <label>
           Email o username
           <input
+            required
             value={form.identifier}
             onChange={(event) =>
               setForm((current) => ({
@@ -55,6 +56,7 @@ export function LoginModal() {
           Contraseña
           <input
             type="password"
+            required
             value={form.password}
             onChange={(event) =>
               setForm((current) => ({ ...current, password: event.target.value }))

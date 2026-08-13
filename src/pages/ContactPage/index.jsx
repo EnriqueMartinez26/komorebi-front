@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { contactService } from "../../services/ContactService";
+import { CONTACT_MESSAGE_MIN_LENGTH } from "../../utils/validation";
 
 export function ContactPage() {
   usePageMeta("Contacto", "Canales de contacto del e-commerce.");
@@ -51,6 +52,7 @@ export function ContactPage() {
         <label>
           Nombre
           <input
+            required
             value={form.name}
             onChange={(event) =>
               setForm((current) => ({ ...current, name: event.target.value }))
@@ -61,6 +63,7 @@ export function ContactPage() {
           Email
           <input
             type="email"
+            required
             value={form.email}
             onChange={(event) =>
               setForm((current) => ({ ...current, email: event.target.value }))
@@ -71,6 +74,8 @@ export function ContactPage() {
           Mensaje
           <textarea
             rows="5"
+            required
+            minLength={CONTACT_MESSAGE_MIN_LENGTH}
             value={form.message}
             onChange={(event) =>
               setForm((current) => ({ ...current, message: event.target.value }))

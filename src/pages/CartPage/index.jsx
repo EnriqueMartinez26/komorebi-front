@@ -4,6 +4,7 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/currency";
+import { CART_ITEM_MIN_QUANTITY } from "../../utils/validation";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { orderService } from "../../services/OrderService";
 import { useUI } from "../../context/UIContext";
@@ -88,11 +89,15 @@ export function CartPage() {
               Cantidad
               <input
                 type="number"
-                min="1"
+                min={CART_ITEM_MIN_QUANTITY}
                 value={item.quantity}
-                onChange={(event) =>
-                  updateItem(item.id, Number(event.target.value))
-                }
+                onChange={(event) => {
+                  const quantity = Number(event.target.value);
+
+                  if (Number.isInteger(quantity) && quantity >= CART_ITEM_MIN_QUANTITY) {
+                    updateItem(item.id, quantity);
+                  }
+                }}
               />
             </label>
             <button type="button" className="link-button" onClick={() => removeItem(item.id)}>
