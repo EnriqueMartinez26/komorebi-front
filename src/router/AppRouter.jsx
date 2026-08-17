@@ -9,6 +9,7 @@ import { ContactPage } from "../pages/ContactPage";
 import { HelpPage } from "../pages/HelpPage";
 import { AboutPage } from "../pages/AboutPage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export function AppRouter() {
   return (
@@ -17,8 +18,22 @@ export function AppRouter() {
         <Route path="/" element={<HomePage />} />
         <Route path="/buscar" element={<SearchResultsPage />} />
         <Route path="/producto/:slug" element={<ProductPage />} />
-        <Route path="/carrito" element={<CartPage />} />
-        <Route path="/favoritos" element={<FavoritesPage />} />
+        <Route
+          path="/carrito"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/favoritos"
+          element={
+            <ProtectedRoute>
+              <FavoritesPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/contacto" element={<ContactPage />} />
         <Route path="/ayuda" element={<HelpPage />} />
         <Route path="/quienes-somos" element={<AboutPage />} />

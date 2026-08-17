@@ -1,4 +1,4 @@
-import { API_URL } from "../utils/constants";
+import { API_URL, AUTH_TOKEN_STORAGE_KEY } from "../utils/constants";
 
 export class BaseHttpService {
   constructor(resource = "") {
@@ -8,22 +8,25 @@ export class BaseHttpService {
 
   async request(path = "", options = {}) {
     const token =
-      typeof window !== "undefined" ? window.localStorage.getItem("auth_token") : null;
+      typeof window !== "undefined"
+        ? window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)
+        : null;
 
     const response = await fetch(`${this.baseUrl}${this.resource}${path}`, {
       credentials: "include",
+      ...options,
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...(options.headers || {})
-      },
-      ...options
+      }
     });
 
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
       const error = new Error(data.message || "Ocurrio un error inesperado.");
+      error.status = response.status;
       error.details = data.details || null;
       throw error;
     }
