@@ -72,7 +72,9 @@ export function LoginModal() {
           <button type="button" className="link-button" onClick={openRegister}>
             Crear cuenta
           </button>
-          <Link to="/forgot-password">Recuperar contraseña</Link>
+          <Link to="/forgot-password" onClick={closeAuthModals}>
+            Recuperar contraseña
+          </Link>
         </div>
       </form>
     </Modal>

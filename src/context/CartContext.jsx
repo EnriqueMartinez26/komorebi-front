@@ -30,30 +30,43 @@ export function CartProvider({ children }) {
     }
   }, [isAuthenticated, isLoading]);
 
-  const addItem = async (productId, quantity = 1) => {
-    const response = await cartService.addItem({ productId, quantity });
-    setCart(response.cart);
-    showToast("Producto agregado al carrito.", "success");
-    return response.cart;
+  const runMutation = async (mutation) => {
+    try {
+      return await mutation();
+    } catch (error) {
+      showToast(error.message, "error");
+      throw error;
+    }
   };
 
-  const updateItem = async (itemId, quantity) => {
-    const response = await cartService.updateItem(itemId, { quantity });
-    setCart(response.cart);
-    return response.cart;
-  };
+  const addItem = (productId, quantity = 1) =>
+    runMutation(async () => {
+      const response = await cartService.addItem({ productId, quantity });
+      setCart(response.cart);
+      showToast("Producto agregado al carrito.", "success");
+      return response.cart;
+    });
 
-  const removeItem = async (itemId) => {
-    const response = await cartService.removeItem(itemId);
-    setCart(response.cart);
-    showToast("Producto eliminado del carrito.", "info");
-  };
+  const updateItem = (itemId, quantity) =>
+    runMutation(async () => {
+      const response = await cartService.updateItem(itemId, { quantity });
+      setCart(response.cart);
+      return response.cart;
+    });
 
-  const clearCart = async () => {
-    const response = await cartService.clear();
-    setCart(response.cart);
-    showToast("Carrito vaciado.", "info");
-  };
+  const removeItem = (itemId) =>
+    runMutation(async () => {
+      const response = await cartService.removeItem(itemId);
+      setCart(response.cart);
+      showToast("Producto eliminado del carrito.", "info");
+    });
+
+  const clearCart = () =>
+    runMutation(async () => {
+      const response = await cartService.clear();
+      setCart(response.cart);
+      showToast("Carrito vaciado.", "info");
+    });
 
   return (
     <CartContext.Provider

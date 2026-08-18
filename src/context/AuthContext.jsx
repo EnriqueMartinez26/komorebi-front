@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { authService } from "../services/AuthService";
+import { setSessionExpiredHandler } from "../services/BaseHttpService";
 import { useUI } from "./UIContext";
 import { AUTH_TOKEN_STORAGE_KEY, UNAUTHORIZED_STATUS } from "../utils/constants";
 
@@ -36,6 +37,24 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     refreshSession();
+  }, []);
+
+  useEffect(() => {
+    setSessionExpiredHandler(() => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
+      if (!window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)) {
+        return;
+      }
+
+      window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+      setUser(null);
+      showToast("Tu sesion expiro. Volve a iniciar sesion.", "info");
+    });
+
+    return () => setSessionExpiredHandler(null);
   }, []);
 
   const login = async (payload) => {

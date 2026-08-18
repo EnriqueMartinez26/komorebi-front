@@ -3,6 +3,7 @@ import { BaseHttpService } from "./BaseHttpService";
 class AuthService extends BaseHttpService {
   constructor() {
     super("/auth");
+    this.notifiesSessionExpired = false;
   }
 
   register(payload) {

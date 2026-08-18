@@ -4,6 +4,7 @@ import { productService } from "../../services/ProductService";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { Loader } from "../../components/ui/Loader";
 import { formatCurrency } from "../../utils/currency";
+import { PRODUCT_IMAGE_FALLBACK } from "../../utils/constants";
 import { ProtectedAction } from "../../components/auth/ProtectedAction";
 import { useCart } from "../../context/CartContext";
 import { useFavorites } from "../../context/FavoritesContext";
@@ -49,7 +50,7 @@ export function ProductPage() {
     <section className="container page-section">
       <div className="product-detail">
         <div className="product-detail-gallery">
-          <img src={product.images[0]} alt={product.name} />
+          <img src={product.images?.[0] || PRODUCT_IMAGE_FALLBACK} alt={product.name} />
         </div>
         <div className="product-detail-copy">
           <span className="section-eyebrow">{product.categoryName}</span>

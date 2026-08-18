@@ -10,6 +10,8 @@ import { orderService } from "../../services/OrderService";
 import { useUI } from "../../context/UIContext";
 import { paymentMethodManager } from "../../utils/payments";
 
+const dismissErrorAlreadyShownByContext = () => undefined;
+
 export function CartPage() {
   usePageMeta("Carrito", "Resumen de compra del usuario.");
 
@@ -72,7 +74,11 @@ export function CartPage() {
             <span className="section-eyebrow">Carrito</span>
             <h1>Resumen de productos</h1>
           </div>
-          <button type="button" className="link-button" onClick={clearCart}>
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => clearCart().catch(dismissErrorAlreadyShownByContext)}
+          >
             Vaciar carrito
           </button>
         </div>
@@ -95,12 +101,18 @@ export function CartPage() {
                   const quantity = Number(event.target.value);
 
                   if (Number.isInteger(quantity) && quantity >= CART_ITEM_MIN_QUANTITY) {
-                    updateItem(item.id, quantity);
+                    updateItem(item.id, quantity).catch(
+                      dismissErrorAlreadyShownByContext
+                    );
                   }
                 }}
               />
             </label>
-            <button type="button" className="link-button" onClick={() => removeItem(item.id)}>
+            <button
+              type="button"
+              className="link-button"
+              onClick={() => removeItem(item.id).catch(dismissErrorAlreadyShownByContext)}
+            >
               Eliminar
             </button>
           </article>

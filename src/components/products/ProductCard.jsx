@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../utils/currency";
+import { PRODUCT_IMAGE_FALLBACK } from "../../utils/constants";
 import { Icon } from "../ui/Icon";
 import { ProtectedAction } from "../auth/ProtectedAction";
 
@@ -16,7 +17,11 @@ export function ProductCard({ product, isFavorite, onToggleFavorite, onAddToCart
   return (
     <article className="product-card">
       <Link to={`/producto/${product.slug}`} className="product-card-media">
-        <img src={product.images[0]} alt={product.name} loading="lazy" />
+        <img
+          src={product.images?.[0] || PRODUCT_IMAGE_FALLBACK}
+          alt={product.name}
+          loading="lazy"
+        />
       </Link>
       <div className="product-card-body">
         <div className="product-card-content">

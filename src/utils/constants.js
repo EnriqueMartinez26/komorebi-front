@@ -11,3 +11,5 @@ export const API_URL = import.meta.env.VITE_API_URL || LOCAL_API_URL;
 export const UNAUTHORIZED_STATUS = 401;
 
 export const AUTH_TOKEN_STORAGE_KEY = "auth_token";
+
+export const PRODUCT_IMAGE_FALLBACK = "/images/placeholder.svg";

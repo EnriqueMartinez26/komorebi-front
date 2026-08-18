@@ -1,9 +1,16 @@
-import { API_URL, AUTH_TOKEN_STORAGE_KEY } from "../utils/constants";
+import { API_URL, AUTH_TOKEN_STORAGE_KEY, UNAUTHORIZED_STATUS } from "../utils/constants";
+
+let sessionExpiredHandler = null;
+
+export function setSessionExpiredHandler(handler) {
+  sessionExpiredHandler = handler;
+}
 
 export class BaseHttpService {
   constructor(resource = "") {
     this.baseUrl = API_URL;
     this.resource = resource;
+    this.notifiesSessionExpired = true;
   }
 
   async request(path = "", options = {}) {
@@ -12,19 +19,33 @@ export class BaseHttpService {
         ? window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)
         : null;
 
-    const response = await fetch(`${this.baseUrl}${this.resource}${path}`, {
-      credentials: "include",
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...(options.headers || {})
-      }
-    });
+    let response;
+
+    try {
+      response = await fetch(`${this.baseUrl}${this.resource}${path}`, {
+        credentials: "include",
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(options.headers || {})
+        }
+      });
+    } catch (_error) {
+      throw new Error("No se pudo conectar con el servidor.");
+    }
 
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
+      if (
+        response.status === UNAUTHORIZED_STATUS &&
+        this.notifiesSessionExpired &&
+        sessionExpiredHandler
+      ) {
+        sessionExpiredHandler();
+      }
+
       const error = new Error(data.message || "Ocurrio un error inesperado.");
       error.status = response.status;
       error.details = data.details || null;

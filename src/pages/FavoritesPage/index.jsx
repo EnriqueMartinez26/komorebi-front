@@ -3,11 +3,13 @@ import { useCart } from "../../context/CartContext";
 import { useFavorites } from "../../context/FavoritesContext";
 import { ProductGrid } from "../../components/products/ProductGrid";
 import { EmptyState } from "../../components/ui/EmptyState";
+import { Loader } from "../../components/ui/Loader";
 
 export function FavoritesPage() {
   usePageMeta("Favoritos", "Listado de productos favoritos.");
 
-  const { items, isFavorite, addFavorite, removeFavorite } = useFavorites();
+  const { items, isLoadingFavorites, isFavorite, addFavorite, removeFavorite } =
+    useFavorites();
   const { addItem } = useCart();
 
   const handleFavorite = async (productId) => {
@@ -28,7 +30,9 @@ export function FavoritesPage() {
         </div>
       </div>
 
-      {items.length ? (
+      {isLoadingFavorites ? (
+        <Loader label="Cargando favoritos..." />
+      ) : items.length ? (
         <ProductGrid
           products={items}
           isFavorite={isFavorite}

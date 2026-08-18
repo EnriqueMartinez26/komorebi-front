@@ -11,8 +11,12 @@ export function ProtectedAction({ children, onAction }) {
       return false;
     }
 
-    await onAction(...args);
-    return true;
+    try {
+      await onAction(...args);
+      return true;
+    } catch (_error) {
+      return false;
+    }
   };
 
   return children({ execute, isAuthenticated });

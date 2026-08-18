@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../utils/currency";
+import { PRODUCT_IMAGE_FALLBACK } from "../../utils/constants";
 import { Icon } from "../ui/Icon";
 
 export function FeaturedSlider({ items }) {
@@ -43,7 +44,11 @@ export function FeaturedSlider({ items }) {
         {items.map((product) => (
           <article key={product.id} className="featured-card">
             <Link to={`/producto/${product.slug}`} className="featured-card-media">
-              <img src={product.images[0]} alt={product.name} loading="lazy" />
+              <img
+                src={product.images?.[0] || PRODUCT_IMAGE_FALLBACK}
+                alt={product.name}
+                loading="lazy"
+              />
             </Link>
             <div className="featured-card-body">
               <span className="product-category">
