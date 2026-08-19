@@ -5,29 +5,16 @@ import { FavoritesBadge } from "../favorites/FavoritesBadge";
 import { useCart } from "../../context/CartContext";
 import { useFavorites } from "../../context/FavoritesContext";
 import { useUI } from "../../context/UIContext";
-import { useAuth } from "../../context/AuthContext";
 import { SearchBar } from "../search/SearchBar";
 
-// cada link del navbar
 class NavItem {
-  constructor(label, path, icon = null, requiresAuth = false) {
+  constructor(label, path, icon = null) {
     this.label = label;
     this.path = path;
     this.icon = icon;
-    this.requiresAuth = requiresAuth;
-  }
-
-  // si se muestra o no
-  canRender(isAuthenticated) {
-    // si necesita login y no hay sesión, ocultar
-    if (this.requiresAuth && !isAuthenticated) {
-      return false;
-    }
-    return true;
   }
 }
 
-// maneja los items del menú
 class NavMenuManager {
   constructor() {
     this.leftItems = [
@@ -38,35 +25,31 @@ class NavMenuManager {
     ];
 
     this.rightItems = [
-      new NavItem("Favoritos", "/favoritos", "heart", false), // Visible para invitados
-      new NavItem("Carrito", "/carrito", "cart", false),      // Visible para invitados
+      new NavItem("Favoritos", "/favoritos", "heart"),
+      new NavItem("Carrito", "/carrito", "cart"),
       new NavItem("Ayuda", "/ayuda", "help")
     ];
   }
 
-  getLeftMenu(isAuthenticated) {
-    return this.leftItems.filter((item) => item.canRender(isAuthenticated));
+  getLeftMenu() {
+    return this.leftItems;
   }
 
-  getRightMenu(isAuthenticated) {
-    return this.rightItems.filter((item) => item.canRender(isAuthenticated));
+  getRightMenu() {
+    return this.rightItems;
   }
 
-  getMobileMenu(isAuthenticated) {
-    return [...this.leftItems, ...this.rightItems].filter((item) =>
-      item.canRender(isAuthenticated)
-    );
+  getMobileMenu() {
+    return [...this.leftItems, ...this.rightItems];
   }
 }
 
-// creo el menu
 const menuManager = new NavMenuManager();
 
 export function StickyNavbar() {
   const { cartCount } = useCart();
   const { favoritesCount } = useFavorites();
   const { isMobileMenuOpen, closeMobileMenu } = useUI();
-  const { isAuthenticated } = useAuth();
 
   const renderBadge = (label) => {
     if (label === "Favoritos") return <FavoritesBadge count={favoritesCount} />;
@@ -78,7 +61,7 @@ export function StickyNavbar() {
     <nav className="sticky-nav" aria-label="Navegación principal">
       <div className="container nav-desktop">
         <div className="nav-left">
-          {menuManager.getLeftMenu(isAuthenticated).map((item) => (
+          {menuManager.getLeftMenu().map((item) => (
             <NavLink
               key={item.label}
               to={item.path}
@@ -90,7 +73,7 @@ export function StickyNavbar() {
         </div>
 
         <div className="nav-right">
-          {menuManager.getRightMenu(isAuthenticated).map((item) => (
+          {menuManager.getRightMenu().map((item) => (
             <NavLink
               key={item.label}
               to={item.path}
@@ -110,13 +93,12 @@ export function StickyNavbar() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
       <div className={`mobile-drawer ${isMobileMenuOpen ? "is-open" : ""}`}>
         <div className="mobile-drawer-panel">
           <div className="mobile-search-wrapper" style={{ padding: "0.5rem" }}>
             <SearchBar expanded={true} className="mobile-search-bar" onToggle={() => {}} />
           </div>
-          {menuManager.getMobileMenu(isAuthenticated).map((item) => (
+          {menuManager.getMobileMenu().map((item) => (
             <NavLink
               key={item.label}
               to={item.path}

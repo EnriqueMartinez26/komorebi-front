@@ -22,12 +22,14 @@ export function CartPage() {
   const [checkoutForm, setCheckoutForm] = useState({
     shippingMethod: "standard",
     shippingAddress: "",
-    paymentMethod: "card",
-    cardHolder: "",
-    cardNumber: ""
+    paymentMethod: "card"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  const selectedPaymentMethod = paymentMethodManager.getMethodById(
+    checkoutForm.paymentMethod
+  );
 
   const handleCheckout = async (event) => {
     event.preventDefault();
@@ -43,7 +45,8 @@ export function CartPage() {
     try {
       await orderService.create({
         shippingMethod: checkoutForm.shippingMethod,
-        shippingAddress: checkoutForm.shippingAddress
+        shippingAddress: checkoutForm.shippingAddress,
+        paymentMethod: checkoutForm.paymentMethod
       });
       await refreshCart();
       showToast("¡Orden creada! La integración de pago queda lista para la siguiente etapa.", "success");
@@ -173,46 +176,15 @@ export function CartPage() {
             </select>
           </label>
 
-          {paymentMethodManager.getMethodById(checkoutForm.paymentMethod)?.requiresCardFields ? (
-            <>
-              <label>
-                Titular de la tarjeta
-                <input
-                  type="text"
-                  value={checkoutForm.cardHolder}
-                  onChange={(event) =>
-                    setCheckoutForm((current) => ({
-                      ...current,
-                      cardHolder: event.target.value
-                    }))
-                  }
-                  required
-                />
-              </label>
-              <label>
-                Número de tarjeta
-                <input
-                  type="text"
-                  placeholder="xxxx xxxx xxxx xxxx"
-                  value={checkoutForm.cardNumber}
-                  onChange={(event) =>
-                    setCheckoutForm((current) => ({
-                      ...current,
-                      cardNumber: event.target.value
-                    }))
-                  }
-                  required
-                />
-              </label>
-            </>
-          ) : (
+          {selectedPaymentMethod ? (
             <div style={{ padding: "0.5rem 0", color: "var(--muted)", fontSize: "0.85rem" }}>
-              <p>✔ Al confirmar se generará un enlace de Mercado Pago para realizar la transacción.</p>
+              <p>{selectedPaymentMethod.description}</p>
             </div>
-          )}
+          ) : null}
 
           <small>
-            La UI de pago queda preparada para integracion futura de pasarela real.
+            El pago es simulado: la orden se registra con el medio de pago elegido y
+            queda pendiente hasta integrar una pasarela real.
           </small>
           {error ? <p className="form-error">{error}</p> : null}
           <button type="submit" disabled={isSubmitting}>

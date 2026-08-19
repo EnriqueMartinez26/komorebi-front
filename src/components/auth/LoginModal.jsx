@@ -25,7 +25,7 @@ export function LoginModal() {
       setForm({ identifier: "", password: "" });
     } catch (submitError) {
       if (submitError.details && Array.isArray(submitError.details)) {
-        const errorMessages = submitError.details.map((d) => d.msg).join("\n");
+        const errorMessages = submitError.details.map((errorDetail) => errorDetail.msg).join("\n");
         setError(errorMessages);
       } else {
         setError(submitError.message);

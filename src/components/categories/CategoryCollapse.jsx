@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AdBanner } from "../ui/AdBanner";
 import { Icon } from "../ui/Icon";
 
-// acciones de cada categoría
 class CategoryAction {
   constructor(label, pathGenerator, iconName = null) {
     this.label = label;
@@ -12,7 +11,6 @@ class CategoryAction {
   }
 }
 
-// arma los botones según la categoría
 class CategoryActionManager {
   constructor() {
     this.actions = [
@@ -30,7 +28,6 @@ class CategoryActionManager {
   }
 }
 
-// creo el manager
 const actionManager = new CategoryActionManager();
 
 export function CategoryCollapse({ categories, sideBanner }) {
